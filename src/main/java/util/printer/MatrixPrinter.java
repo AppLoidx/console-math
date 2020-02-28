@@ -1,4 +1,4 @@
-package util;
+package util.printer;
 
 import model.Matrix;
 

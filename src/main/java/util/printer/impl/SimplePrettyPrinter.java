@@ -1,11 +1,10 @@
-package util.impl;
+package util.printer.impl;
 
 import model.Matrix;
-import util.MatrixPrinter;
+import util.printer.MatrixPrinter;
 
 import java.io.PrintStream;
 import java.util.Optional;
-import java.util.stream.IntStream;
 
 /**
  * @author Arthur Kupriyanov on 28.02.2020
