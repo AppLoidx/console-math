@@ -1,0 +1,12 @@
+package util;
+
+import model.Matrix;
+
+import java.io.PrintStream;
+
+/**
+ * @author Arthur Kupriyanov on 28.02.2020
+ */
+public interface MatrixPrinter {
+    void prettyPrint(Matrix<?> matrix, PrintStream out);
+}
