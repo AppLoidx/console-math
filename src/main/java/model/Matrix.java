@@ -1,11 +1,7 @@
 package model;
 
-import java.io.InputStream;
 import java.util.Optional;
 import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
-import java.util.function.DoubleConsumer;
 import java.util.stream.IntStream;
 
 /**

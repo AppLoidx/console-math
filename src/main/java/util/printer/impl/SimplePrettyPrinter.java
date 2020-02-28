@@ -10,7 +10,7 @@ import java.util.Optional;
  * @author Arthur Kupriyanov on 28.02.2020
  */
 public final class SimplePrettyPrinter implements MatrixPrinter {
-
+    @Override
     public void prettyPrint(Matrix<?> matrix, PrintStream out){
         final String[][] printMap = new String[matrix.getYSize()][matrix.getXSize()];
         final int[] maxLength = {0};
