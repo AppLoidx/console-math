@@ -21,54 +21,38 @@
             </plugin>
 
 
-            <!--            <plugin>-->
-            <!--                &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-pmd-plugin &ndash;&gt;-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-pmd-plugin</artifactId>-->
-            <!--                <version>3.13.0</version>-->
+                        <plugin>
+                            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-pmd-plugin -->
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-pmd-plugin</artifactId>
+                            <version>3.13.0</version>
 
 
-            <!--                <configuration>-->
-            <!--                    <targetJdk>11</targetJdk>-->
-            <!--                    <verbose>true</verbose>-->
-            <!--                    <rulesets>-->
-            <!--                        <ruleset>\pmd-rulesets.xml</ruleset>-->
-            <!--                    </rulesets>-->
-            <!--                    <printFailingErrors>true</printFailingErrors>-->
-            <!--                    <linkXRef>false</linkXRef>-->
-            <!--                </configuration>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <phase>package</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>check</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
+                            <configuration>
+                                <targetJdk>11</targetJdk>
+                                <verbose>true</verbose>
+                                <rulesets>
+                                    <ruleset>ruleset/codestyle-rules.xml</ruleset>
+                                </rulesets>
+                                <linkXRef>false</linkXRef>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <phase>package</phase>
+                                    <goals>
+                                        <goal>check</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
 
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-checkstyle-plugin</artifactId>-->
-            <!--                <version>2.7</version>-->
+<!--                        <plugin>-->
+<!--                            <groupId>org.apache.maven.plugins</groupId>-->
+<!--                            <artifactId>maven-checkstyle-plugin</artifactId>-->
+<!--                            <version>2.7</version>-->
 
-            <!--            </plugin>-->
+<!--                        </plugin>-->
 
-            <!--            <plugin>-->
-            <!--                <groupId>org.codehaus.mojo</groupId>-->
-            <!--                <artifactId>findbugs-maven-plugin</artifactId>-->
-            <!--                <version>3.0.4</version>-->
-            <!--                <configuration>-->
-            <!--                    <effort>Max</effort>-->
-            <!--                </configuration>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <goals>-->
-            <!--                            <goal>check</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
         </plugins>
     </build>
     <dependencies>
