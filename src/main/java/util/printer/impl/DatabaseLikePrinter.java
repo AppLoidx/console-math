@@ -4,7 +4,6 @@ import model.Matrix;
 import util.printer.MatrixPrinter;
 
 import java.io.PrintStream;
-import java.util.Optional;
 
 import static java.lang.String.format;
 
@@ -107,16 +106,12 @@ public final class DatabaseLikePrinter implements MatrixPrinter {
     }
 
     @Override
-    public void prettyPrint(Matrix<?> matrix, PrintStream out) {
+    public void prettyPrint(Matrix matrix, PrintStream out) {
         final String[][] printMap = new String[matrix.getYSize()][matrix.getXSize()];
 
         matrix.consume((y, x) -> {
-            Optional<? extends Number> element = matrix.getElement(x, y);
-            if (element.isPresent()){
-                printMap[y][x] = element.get().toString();
-            } else {
-                printMap[y][x] = "None";
-            }
+            float element = matrix.getElement(y, x);
+            printMap[y][x] = String.valueOf(element);
         });
 
         print(printMap, out);

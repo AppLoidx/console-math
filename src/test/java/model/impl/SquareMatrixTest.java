@@ -16,42 +16,42 @@ class SquareMatrixTest {
 
     @Test
     public void initTest() {
-        SquareMatrix<Integer> actualMatrix = new SquareMatrix<>();
+        SquareMatrix actualMatrix = new SquareMatrix();
         final int xLen = 12;
         final int yLen = 12;
-        Integer[][] matrix = randomizerUtil.getRandomMatrix(Integer.class, xLen, yLen);
+        float[][] matrix = randomizerUtil.getRandomMatrix(xLen, yLen);
 
         actualMatrix.init(matrix);
 
         for (int y = 0; y < yLen ; y++){
             for (int x = 0; x < xLen; x++){
-                assertEquals(matrix[y][x], actualMatrix.getElement(x, y).get());
+                assertEquals(matrix[y][x], actualMatrix.getElement(x, y));
             }
         }
     }
 
     @Test
     public void get_set_Element(){
-        SquareMatrix<Long> actualMatrix = new SquareMatrix<>();
+        SquareMatrix actualMatrix = new SquareMatrix();
         final int xLen = 5;
         final int yLen = 5;
-        Long[][] matrix = randomizerUtil.getRandomMatrix(Long.class, xLen, yLen);
+        float[][] matrix = randomizerUtil.getRandomMatrix(xLen, yLen);
 
-        actualMatrix.init(new Long[yLen][xLen]);    // with null values
+        actualMatrix.init(new float[yLen][xLen]);
 
         for (int y = 0; y < yLen ; y++){
             for (int x = 0; x < xLen; x++){
-                Optional<Long> oldValue = actualMatrix.setElement(x, y, matrix[y][x]);
-                assertFalse(oldValue.isPresent());
+                float oldValue = actualMatrix.setElement(x, y, matrix[y][x]);
+                assertEquals(0f, oldValue);
             }
         }
 
-        SquareMatrix<Long> expectedMatrix = new SquareMatrix<>();
+        SquareMatrix expectedMatrix = new SquareMatrix();
         expectedMatrix.init(matrix);
 
         for (int y = 0; y < yLen ; y++){
             for (int x = 0; x < xLen; x++){
-                assertEquals(matrix[y][x], actualMatrix.getElement(x, y).get());
+                assertEquals(matrix[y][x], actualMatrix.getElement(x, y));
                 assertEquals(expectedMatrix.getElement(x, y), actualMatrix.getElement(x, y));
             }
         }

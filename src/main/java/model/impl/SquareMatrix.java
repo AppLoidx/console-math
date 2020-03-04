@@ -2,31 +2,31 @@ package model.impl;
 
 import model.Matrix;
 
-import java.util.Optional;
+import java.util.Arrays;
+
 
 /**
  * @author Arthur Kupriyanov on 28.02.2020
  */
-public class SquareMatrix<T extends Number> implements Matrix<T> {
+public class SquareMatrix implements Matrix {
 
-    private T[][] matrix;
+    private float[][] matrix;
 
     @Override
-    public void init(T[][] matrix) {
+    public void init(float[][] matrix) {
         this.matrix = matrix;
     }
 
     @Override
-    public Optional<T> setElement(final int x, final  int y, final  T value) {
-        Optional<T> oldValue = Optional.ofNullable(matrix[y][x]);
+    public float setElement(final int y, final int x, final  float value) {
+        float oldValue = matrix[y][x];
         matrix[y][x] = value;
         return oldValue;
     }
 
     @Override
-    public Optional<T> getElement(int x, int y) {
-        T element = matrix[y][x];
-        return Optional.ofNullable(element);
+    public float getElement(int  y, int x) {
+        return matrix[y][x];
     }
 
     @Override
@@ -37,5 +37,16 @@ public class SquareMatrix<T extends Number> implements Matrix<T> {
     @Override
     public int getYSize() {
         return matrix.length;
+    }
+
+    public float[][] getMatrix(){
+        return matrix;
+    }
+
+    @Override
+    public String toString() {
+        return "SquareMatrix{" +
+               "matrix=" + Arrays.toString(matrix) +
+               '}';
     }
 }

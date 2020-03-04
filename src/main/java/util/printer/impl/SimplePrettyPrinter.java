@@ -4,24 +4,19 @@ import model.Matrix;
 import util.printer.MatrixPrinter;
 
 import java.io.PrintStream;
-import java.util.Optional;
 
 /**
  * @author Arthur Kupriyanov on 28.02.2020
  */
 public final class SimplePrettyPrinter implements MatrixPrinter {
     @Override
-    public void prettyPrint(Matrix<?> matrix, PrintStream out){
+    public void prettyPrint(Matrix matrix, PrintStream out){
         final String[][] printMap = new String[matrix.getYSize()][matrix.getXSize()];
         final int[] maxLength = {0};
 
         matrix.consume((y, x) -> {
-            Optional<? extends Number> element = matrix.getElement(x, y);
-            if (element.isPresent()){
-                printMap[y][x] = element.get().toString();
-            } else {
-                printMap[y][x] = "None";
-            }
+            float element = matrix.getElement(y, x);
+            printMap[y][x] = String.valueOf(element);
 
             maxLength[0] = Math.max(printMap[y][x].length(), maxLength[0]);
         });

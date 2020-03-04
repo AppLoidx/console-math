@@ -12,10 +12,15 @@ class DatabaseLikePrinterTest {
 
     @Test
     public void prettyPrint(){
-        Matrix<Integer> matrix = new SquareMatrix<>();
-        matrix.init(new RandomizerUtil().getRandomMatrix(Integer.class, 12, 12));
+        Matrix matrix = new SquareMatrix();
+        matrix.init(new RandomizerUtil().getRandomMatrix(12, 12));
 
         new DatabaseLikePrinter().prettyPrint(matrix, System.out);
+    }
+
+    @Test
+    public void smallTest(){
+        System.out.println(Float.valueOf(0));
     }
 
 }

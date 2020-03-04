@@ -1,19 +1,19 @@
 package model;
 
-import java.util.Optional;
+
 import java.util.function.BiConsumer;
 import java.util.stream.IntStream;
 
 /**
  * @author Arthur Kupriyanov on 28.02.2020
  */
-public interface Matrix<T extends Number> {
+public interface Matrix {
     /**
      * Initialize matrix
      *
      * @param matrix array matrix input
      */
-    void init(T[][] matrix);
+    void init(float[][] matrix);
 
     /**
      * @param x     x-coordinate from left-to-right
@@ -21,14 +21,14 @@ public interface Matrix<T extends Number> {
      * @param value value of cell
      * @return old cell value
      */
-    Optional<T> setElement(int x, int y, T value);
+    float setElement(int y, int x, float value);
 
     /**
      * @param x x-coordinate from left-to-right
      * @param y y-coordinate from top-to-bottom
      * @return cell value
      */
-    Optional<T> getElement(int x, int y);
+    float getElement(int y, int x);
 
 
     default void consume(BiConsumer<Integer, Integer> biConsumer, Runnable afterEachRowCallback) {

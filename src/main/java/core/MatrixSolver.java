@@ -5,8 +5,8 @@ import model.Matrix;
 /**
  * @author Arthur Kupriyanov on 28.02.2020
  */
-public interface MatrixSolver<T extends Number> {
+public interface MatrixSolver{
 
-    float getDeterminant(Matrix<T> matrix);
+    float getDeterminant(Matrix matrix);
 
 }

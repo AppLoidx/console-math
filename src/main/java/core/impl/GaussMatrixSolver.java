@@ -6,10 +6,10 @@ import model.Matrix;
 /**
  * @author Arthur Kupriyanov on 28.02.2020
  */
-public class GaussMatrixSolver<T extends Number> implements MatrixSolver<T> {
+public class GaussMatrixSolver implements MatrixSolver {
 
     @Override
-    public float getDeterminant(Matrix<T> matrix) {
+    public float getDeterminant(Matrix matrix) {
         return 0;
     }
 }
