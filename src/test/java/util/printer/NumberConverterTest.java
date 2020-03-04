@@ -2,8 +2,6 @@ package util.printer;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author Arthur Kupriyanov on 03.03.2020
  */

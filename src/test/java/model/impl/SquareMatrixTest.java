@@ -3,10 +3,7 @@ package model.impl;
 import org.junit.jupiter.api.Test;
 import testutil.RandomizerUtil;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * @author Arthur Kupriyanov on 28.02.2020

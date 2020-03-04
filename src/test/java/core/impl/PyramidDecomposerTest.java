@@ -1,15 +1,9 @@
 package core.impl;
 
-import model.Matrix;
 import model.impl.SquareMatrix;
 import org.junit.jupiter.api.Test;
-import testutil.RandomizerUtil;
 import util.printer.MatrixPrinter;
 import util.printer.impl.SimplePrettyPrinter;
-
-import java.util.Queue;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Arthur Kupriyanov on 03.03.2020

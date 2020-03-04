@@ -5,8 +5,6 @@ import model.impl.SquareMatrix;
 import org.junit.jupiter.api.Test;
 import testutil.RandomizerUtil;
 
-import java.util.Arrays;
-
 /**
  * @author Arthur Kupriyanov on 28.02.2020
  */
