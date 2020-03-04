@@ -15,7 +15,6 @@ public class GaussMatrixSolver implements MatrixSolver {
 
     private float determinant;
     private float[] variables;
-    private float[] residualColumn;
     private Matrix triangleMatrix;
     private Matrix matrix;
 
@@ -62,7 +61,7 @@ public class GaussMatrixSolver implements MatrixSolver {
     }
 
     public float[] getResidualColumn(){
-        return residualColumn = ResidualColumn.getFrom(matrix, getVariables());
+        return ResidualColumn.getFrom(matrix, getVariables());
     }
 
     private float findVariable(Matrix matrix, int hIndex, float initialValue, float[] previousVariables){
@@ -73,14 +72,4 @@ public class GaussMatrixSolver implements MatrixSolver {
         return value;
     }
 
-    private float[] reverse(float[] source){
-        float[] reversed = new float[source.length];
-        int index = reversed.length - 1;
-        for (float val : source){
-            reversed[index] = val;
-            index--;
-        }
-
-        return reversed;
-    }
 }
