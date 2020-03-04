@@ -21,8 +21,15 @@ public final class DatabaseLikePrinter implements MatrixPrinter {
 
     private final String asNull;
 
+    private PrintStream out = System.out;
+
+
     public DatabaseLikePrinter() {
         this.asNull = DEFAULT_AS_NULL;
+    }
+    public DatabaseLikePrinter(PrintStream out){
+        this();
+        this.out = out;
     }
 
     public void print(String[][] table, PrintStream out) {
@@ -115,5 +122,10 @@ public final class DatabaseLikePrinter implements MatrixPrinter {
         });
 
         print(printMap, out);
+    }
+
+    @Override
+    public void prettyPrint(Matrix matrix) {
+        prettyPrint(matrix, out);
     }
 }

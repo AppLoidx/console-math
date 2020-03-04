@@ -1,13 +1,15 @@
 package model;
 
 
+import core.MatrixDecomposer;
+
 import java.util.function.BiConsumer;
 import java.util.stream.IntStream;
 
 /**
  * @author Arthur Kupriyanov on 28.02.2020
  */
-public interface Matrix {
+public interface Matrix{
     /**
      * Initialize matrix
      *
@@ -39,13 +41,32 @@ public interface Matrix {
                     afterEachRowCallback.run();
                 });
     }
+    default void consumeReverse(BiConsumer<Integer, Integer> biConsumer, Runnable afterEachRowCallback) {
+        IntStream.range(getYSize(), 0)
+                .forEach(y -> {
+                    IntStream.range(getXSize(), 0)
+                            .forEach(x -> biConsumer.accept(y, x));
+                    afterEachRowCallback.run();
+                });
+    }
+
 
     default void consume(BiConsumer<Integer, Integer> biConsumer) {
         consume(biConsumer, () -> {});
     }
 
+    default void consumeReverse(BiConsumer<Integer, Integer> biConsumer) {
+        consumeReverse(biConsumer, () -> {});
+    }
+
+    default Matrix decompose(MatrixDecomposer matrixDecomposer){
+        return matrixDecomposer.decompose(this);
+    }
+
     int getXSize();
 
     int getYSize();
+
+    Matrix getClone();
 
 }

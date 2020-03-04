@@ -39,6 +39,21 @@ public class SquareMatrix implements Matrix {
         return matrix.length;
     }
 
+    @Override
+    public Matrix getClone() {
+        Matrix clone = new SquareMatrix();
+        float[][] copyMatrix = new float[getYSize()][getXSize()];
+        int hIndex = 0;
+        for( float[] array : getMatrix() ) {
+            copyMatrix[hIndex] = Arrays.copyOf(array, array.length);
+            hIndex++;
+        }
+
+        clone.init(copyMatrix);
+
+        return clone;
+    }
+
     public float[][] getMatrix(){
         return matrix;
     }
@@ -48,5 +63,11 @@ public class SquareMatrix implements Matrix {
         return "SquareMatrix{" +
                "matrix=" + Arrays.toString(matrix) +
                '}';
+    }
+
+    @Override
+    public Matrix clone() throws CloneNotSupportedException {
+        return (Matrix) super.clone();
+
     }
 }

@@ -9,6 +9,15 @@ import java.io.PrintStream;
  * @author Arthur Kupriyanov on 28.02.2020
  */
 public final class SimplePrettyPrinter implements MatrixPrinter {
+
+    private PrintStream out = System.out;
+
+    public SimplePrettyPrinter(){}
+    public SimplePrettyPrinter(PrintStream out){
+        this.out = out;
+    }
+
+
     @Override
     public void prettyPrint(Matrix matrix, PrintStream out){
         final String[][] printMap = new String[matrix.getYSize()][matrix.getXSize()];
@@ -26,5 +35,10 @@ public final class SimplePrettyPrinter implements MatrixPrinter {
             out.print(String.format("%" + spaceBetween + "s", printMap[y][x]));
         }, out::println);
 
+    }
+
+    @Override
+    public void prettyPrint(Matrix matrix) {
+        prettyPrint(matrix, out);
     }
 }
