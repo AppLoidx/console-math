@@ -16,13 +16,13 @@ class SquareMatrixTest {
         SquareMatrix actualMatrix = new SquareMatrix();
         final int xLen = 12;
         final int yLen = 12;
-        float[][] matrix = randomizerUtil.getRandomMatrix(xLen, yLen);
+        float[][] matrix = RandomizerUtil.getRandomMatrix(xLen, yLen);
 
         actualMatrix.init(matrix);
 
         for (int y = 0; y < yLen ; y++){
             for (int x = 0; x < xLen; x++){
-                assertEquals(matrix[y][x], actualMatrix.getElement(x, y));
+                assertEquals(matrix[y][x], actualMatrix.getElement(y, x));
             }
         }
     }
@@ -32,13 +32,13 @@ class SquareMatrixTest {
         SquareMatrix actualMatrix = new SquareMatrix();
         final int xLen = 5;
         final int yLen = 5;
-        float[][] matrix = randomizerUtil.getRandomMatrix(xLen, yLen);
+        float[][] matrix = RandomizerUtil.getRandomMatrix(xLen, yLen);
 
         actualMatrix.init(new float[yLen][xLen]);
 
         for (int y = 0; y < yLen ; y++){
             for (int x = 0; x < xLen; x++){
-                float oldValue = actualMatrix.setElement(x, y, matrix[y][x]);
+                float oldValue = actualMatrix.setElement(y, x, matrix[y][x]);
                 assertEquals(0f, oldValue);
             }
         }
@@ -48,8 +48,8 @@ class SquareMatrixTest {
 
         for (int y = 0; y < yLen ; y++){
             for (int x = 0; x < xLen; x++){
-                assertEquals(matrix[y][x], actualMatrix.getElement(x, y));
-                assertEquals(expectedMatrix.getElement(x, y), actualMatrix.getElement(x, y));
+                assertEquals(matrix[y][x], actualMatrix.getElement(y, x));
+                assertEquals(expectedMatrix.getElement(y,x), actualMatrix.getElement(y, x));
             }
         }
     }
