@@ -9,6 +9,9 @@ import util.printer.impl.SimplePrettyPrinter;
 import java.io.PrintStream;
 import java.util.Arrays;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 /**
  * @author Arthur Kupriyanov on 04.03.2020
  */
@@ -50,5 +53,24 @@ class GaussMatrixSolverTest {
         }
 
         OUT.print("\nНевязка: " + Arrays.toString(solver.getResidualColumn()));
+    }
+
+    @Test
+    public void canBeSolved(){
+        SquareMatrix squareMatrix = new SquareMatrix();
+        squareMatrix.init(new float[][]{
+                {0, 2, -5, -1},
+                {2, 0, 3 , 13},
+                {1, 2 , 0 , 9}
+        });
+        assertFalse(GaussMatrixSolver.isCanBeSolved(squareMatrix));
+
+        squareMatrix.init(new float[][]{
+                {3, 2, -5, -1},
+                {2, -1, 3 , 13},
+                {1, 2 , -1 , 9}
+        });
+
+        assertTrue(GaussMatrixSolver.isCanBeSolved(squareMatrix));
     }
 }

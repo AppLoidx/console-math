@@ -72,4 +72,16 @@ public class GaussMatrixSolver implements MatrixSolver {
         return value;
     }
 
+    public static boolean isCanBeSolved(Matrix matrix){
+
+        for (int i = 0; i < matrix.getYSize(); i++) {
+            if (matrix.getElement(i, i) == 0) {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
 }
