@@ -15,7 +15,7 @@ public final class ResidualColumn {
             for (int vIndex = 0; vIndex < matrix.getXSize() - 1; vIndex++) {    // without B column
                 sum = sum + matrix.getElement(hIndex, vIndex) * variables[vIndex];
             }
-            residualColumn[hIndex] = Math.abs(sum - matrix.getElement(hIndex, matrix.getXSize() - 1));
+            residualColumn[hIndex] = sum - matrix.getElement(hIndex, matrix.getXSize() - 1);
         }
 
         return residualColumn;
