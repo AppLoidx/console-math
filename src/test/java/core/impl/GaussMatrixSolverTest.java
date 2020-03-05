@@ -3,6 +3,7 @@ package core.impl;
 import model.Matrix;
 import model.impl.SquareMatrix;
 import org.junit.jupiter.api.Test;
+import testutil.RandomizerUtil;
 import util.printer.MatrixPrinter;
 import util.printer.impl.SimplePrettyPrinter;
 
@@ -36,23 +37,26 @@ class GaussMatrixSolverTest {
         float determinant = solver.getDeterminant();
         Matrix triangleMatrix = solver.getTriangleMatrix();
 
-        OUT.println("Исходная матрца: ");
-        PRINTER.prettyPrint(squareMatrix, OUT);
+        printSolution(squareMatrix, triangleMatrix, determinant, variables, solver);
 
-        OUT.println("Треугольная матрица: ");
-        PRINTER.prettyPrint(triangleMatrix, OUT);
+        squareMatrix.init(RandomizerUtil.getRandomMatrix(7, 6));
 
-        OUT.print("Детерминант:");
-        OUT.println(determinant);
+        solver = new GaussMatrixSolver(squareMatrix);
+        variables = solver.getVariables();
+        determinant = solver.getDeterminant();
+        triangleMatrix = solver.getTriangleMatrix();
 
-        OUT.print("Переменные: ");
-        int index = 1;
-        for (float val : variables){
-            OUT.print(String.format("x%d: %f, ", index, val));
-            index++;
-        }
+        printSolution(squareMatrix, triangleMatrix, determinant, variables, solver);
 
-        OUT.print("\nНевязка: " + Arrays.toString(solver.getResidualColumn()));
+        squareMatrix.init(RandomizerUtil.getRandomMatrix(4, 3));
+
+        solver = new GaussMatrixSolver(squareMatrix);
+        variables = solver.getVariables();
+        determinant = solver.getDeterminant();
+        triangleMatrix = solver.getTriangleMatrix();
+
+        printSolution(squareMatrix, triangleMatrix, determinant, variables, solver);
+
     }
 
     @Test
@@ -72,5 +76,25 @@ class GaussMatrixSolverTest {
         });
 
         assertTrue(GaussMatrixSolver.isCanBeSolved(squareMatrix));
+    }
+
+    private void printSolution(Matrix source, Matrix triangle, float determinant , float[] variables, GaussMatrixSolver solver){
+        OUT.println("Исходная матрца: ");
+        PRINTER.prettyPrint(source, OUT);
+
+        OUT.println("Треугольная матрица: ");
+        PRINTER.prettyPrint(triangle, OUT);
+
+        OUT.print("Детерминант:");
+        OUT.println(determinant);
+
+        OUT.print("Переменные: ");
+        int index = 1;
+        for (float val : variables){
+            OUT.print(String.format("x%d: %f, ", index, val));
+            index++;
+        }
+
+        OUT.print("\nНевязка: " + Arrays.toString(solver.getResidualColumn()));
     }
 }

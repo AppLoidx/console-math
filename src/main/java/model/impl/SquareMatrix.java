@@ -14,7 +14,13 @@ public class SquareMatrix implements Matrix {
 
     @Override
     public void init(float[][] matrix) {
-        this.matrix = matrix;
+
+        if (matrix.length > 0 && matrix.length + 1 == matrix[0].length){
+            this.matrix = matrix;
+        } else {
+            throw new IllegalArgumentException("Provided matrix is not square");
+        }
+
     }
 
     @Override
