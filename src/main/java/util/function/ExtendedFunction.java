@@ -9,8 +9,20 @@ import java.util.function.Function;
  */
 public class ExtendedFunction implements Function<Double, Double>{
     private Map<Double, Function<Double, Double>> piecewiseMap = new HashMap<>();
-    private Function<Double, Double> function;
+    private final Function<Double, Double> function;
+
+    private ExtendedFunction representation;
     private double[] boundaries = new double[2];
+
+    public Function<Double, Boolean> getIsInRange() {
+        return isInRange;
+    }
+
+    public void setIsInRange(Function<Double, Boolean> isInRange) {
+        this.isInRange = isInRange;
+    }
+
+    private Function<Double, Boolean> isInRange = x -> true;
 
     private DerivativeFunction derivativeFunction;
     private byte signChange = 1;
@@ -27,17 +39,24 @@ public class ExtendedFunction implements Function<Double, Double>{
         function = extFunc.function;
         derivativeFunction = extFunc.derivativeFunction;
         signChange = extFunc.signChange;
+        this.representation = getRepresentation();
+    }
+
+
+    public ExtendedFunction getRepresentation() {
+        return representation;
+    }
+
+    public void setRepresentation(ExtendedFunction representation) {
+        this.representation = representation;
     }
 
     public void setSignChange(byte b) {
         signChange = b;
     }
     public double apply(double value) {
-        if (piecewiseMap.containsKey(value)) {
-            return signChange * piecewiseMap.get(value).apply(value);
-        } else {
-            return signChange * function.apply(value);
-        }
+        if (isInRange.apply(value)) return signChange * piecewiseMap.getOrDefault(value, function).apply(value);
+        else throw new IllegalArgumentException("Значение функции вышло из области допустимых значений");
     }
 
     public void setPiecewiseMap(Map<Double, Function<Double, Double>> piecewiseMap) {
@@ -76,14 +95,11 @@ public class ExtendedFunction implements Function<Double, Double>{
                                             // machine eps, btw x)
         double currentValue = Math.min(top, bottom);
         double maxVal = -Double.MAX_VALUE;
-        System.out.println("cv : " + currentValue);
         while (sectionsCount - 1 > 0) {
             maxVal = Math.max(function.apply(currentValue), maxVal);
             currentValue += step;
             sectionsCount--;
         }
-        System.out.println("cv after : " + currentValue);
-        System.out.println("max val : " + maxVal);
 
         // check top and bottom separately
         maxVal = Math.max(maxVal, function.apply(top));

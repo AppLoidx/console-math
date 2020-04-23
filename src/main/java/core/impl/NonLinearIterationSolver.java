@@ -15,21 +15,16 @@ public class NonLinearIterationSolver implements NonLinearSolver {
     @Override
     public double solve(ExtendedFunction extFunction, double accuracy) {
 
-        double lambda = - 1d /
-                        ExtendedFunction.getMaxValueOfFunc(
-                                extFunction.getDerivativeFunction(),
-                                extFunction.getBoundaries()[0],
-                                extFunction.getBoundaries()[1],
-                                accuracy);
-        System.out.println("lambda" + lambda);
-        ExtendedFunction supportFunc = new ExtendedFunction(x -> x + lambda * extFunction.apply(x));
-        supportFunc.setDerivativeFunction(new DerivativeFunction(x -> 1 + lambda * extFunction.getDerivativeFunction().apply(x)));
+        ExtendedFunction supportFunc = NonLinearSolver.createSupportFunction(extFunction, accuracy);
         double x0;
         double x = extFunction.getBoundaries()[0];
         int counter = 0;
         do {
             x0 = x;
             x = supportFunc.apply(x);
+            if (Math.abs(supportFunc.getDerivativeFunction().apply(x)) > 1) {
+                throw new IllegalArgumentException("Итерационный метод не сходится. ф(x)' > 1");
+            }
             counter++;
         } while(Math.abs(x - x0) >= accuracy && counter < MAX_ITERATION);
         System.out.println(supportFunc.getDerivativeFunction().apply(x));
