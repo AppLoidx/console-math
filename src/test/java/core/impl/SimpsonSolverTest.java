@@ -6,7 +6,7 @@ import util.function.ExtendedFunction;
 
 import java.util.function.Function;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Arthur Kupriyanov on 18.03.2020

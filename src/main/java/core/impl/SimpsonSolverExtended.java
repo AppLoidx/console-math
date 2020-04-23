@@ -15,7 +15,7 @@ public class SimpsonSolverExtended implements IntegralSolver {
 
     private Double lastNormalValue;
 
-    public double solveWithAccuracy(ExtendedFunction extendedFunction, int top, int bottom, double expectedAccuracy){
+    public double solveWithAccuracy(ExtendedFunction extendedFunction, int top, int bottom, double expectedAccuracy) {
         double partition = 40;
         double actualAccuracy = Double.MAX_VALUE;
         double oldValue = solve(extendedFunction, top, bottom, partition);
@@ -36,8 +36,6 @@ public class SimpsonSolverExtended implements IntegralSolver {
         }
 
         lastPartition = partition;
-
-
 
         return oldValue;
     }
