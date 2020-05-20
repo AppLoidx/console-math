@@ -1,11 +1,11 @@
 package core.impl;
 
 import core.NonLinearSolver;
-import util.function.DerivativeFunction;
 import util.function.ExtendedFunction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Simple-iterative method for solving nonlinear systems
@@ -17,26 +17,26 @@ public class NonLinearSystemSolver implements core.NonLinearSystemSolver {
     private static final int MAX_ITERATION = 1_000_000;
 
     @Override
-    public double[] nonlinearSystemSolver(List<ExtendedFunction> extendedFunctions, double accuracy) {
+    public double[] nonlinearSystemSolver(List<ExtendedFunction> functions, double accuracy) {
         List<Double> listX = new ArrayList<>();
 
-        for (int i = 0; i < extendedFunctions.size(); i++) {
-            listX.add(i, extendedFunctions.get(i).getBoundaries()[i % 2]);
+        for (int i = 0; i < functions.size(); i++) {
+            listX.add(i, functions.get(i).getBoundaries()[i % 2]);
         }
+
+//        functions = functions.stream()
+//                .map(f -> NonLinearSolver.createSupportFunction(f, accuracy))
+//                .collect(Collectors.toList());
 
         List<Double> listX0 = new ArrayList<>(listX);
         int counter = 0;
         do {
-            for (int i = 0; i < extendedFunctions.size(); i++) {
-                ExtendedFunction supportFunc = extendedFunctions.get(i);
+            for (int i = 0; i < functions.size(); i++) {
+                ExtendedFunction supportFunc = functions.get(i);
                 listX0.set(i, listX.get(i));
-                if (Math.abs(extendedFunctions.get(0).getDerivativeFunction().apply(listX.get(0))) + Math.abs(extendedFunctions.get(1).getDerivativeFunction().apply(listX.get(1))) > 1) {
-                    throw new IllegalArgumentException("Итерационный метод не сходится");
-                }
                 listX.set(i, supportFunc.apply(listX.get(i)));
                 counter++;
             }
-
 
         } while(allInListDeltaMoreThanAccuracy(listX, listX0, accuracy) && counter < MAX_ITERATION);
 
@@ -54,15 +54,6 @@ public class NonLinearSystemSolver implements core.NonLinearSystemSolver {
         }
 
         return moreThanAccuracy;
-    }
-
-    private List<ExtendedFunction> createSupportFunction(List<ExtendedFunction> extendedFunctions, double accuracy){
-        List<ExtendedFunction> supportFunc = new ArrayList<>();
-        for (ExtendedFunction extendedFunction : extendedFunctions) {
-            supportFunc.add(NonLinearSolver.createSupportFunction(extendedFunction, accuracy));
-        }
-
-        return supportFunc;
     }
 
     @Override

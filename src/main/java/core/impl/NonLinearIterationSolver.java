@@ -3,6 +3,7 @@ package core.impl;
 import core.NonLinearSolver;
 import util.function.DerivativeFunction;
 import util.function.ExtendedFunction;
+import util.function.interfaces.DoubleFunction;
 
 /**
  * @author Arthur Kupriyanov on 07.04.2020
@@ -22,15 +23,12 @@ public class NonLinearIterationSolver implements NonLinearSolver {
         do {
             x0 = x;
             x = supportFunc.apply(x);
-            if (Math.abs(supportFunc.getDerivativeFunction().apply(x)) > 1) {
-                throw new IllegalArgumentException("Итерационный метод не сходится. ф(x)' > 1");
-            }
             counter++;
         } while(Math.abs(x - x0) >= accuracy && counter < MAX_ITERATION);
-        System.out.println(supportFunc.getDerivativeFunction().apply(x));
+
         lastXVal = x;
         if (counter == MAX_ITERATION) {
-            throw new IllegalArgumentException("Превышено макмимальное количество итераций (50_000_000)");
+            throw new IllegalArgumentException("Превышено максимальное количество итераций (50_000_000)");
         }
 
         return x;
@@ -38,10 +36,6 @@ public class NonLinearIterationSolver implements NonLinearSolver {
 
     @Override
     public double getLastAnswer() {
-        return lastXVal;
-    }
-
-    public Double getLastXVal() {
-        return lastXVal;
+        return lastXVal == null ? Double.NaN : lastXVal;
     }
 }
