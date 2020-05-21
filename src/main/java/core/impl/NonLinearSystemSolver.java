@@ -18,29 +18,28 @@ public class NonLinearSystemSolver implements core.NonLinearSystemSolver {
 
     @Override
     public double[] nonlinearSystemSolver(List<ExtendedFunction> functions, double accuracy) {
-        List<Double> listX = new ArrayList<>();
-
+        List<Double> rootList = new ArrayList<>();
         for (int i = 0; i < functions.size(); i++) {
-            listX.add(i, functions.get(i).getBoundaries()[i % 2]);
+            rootList.add(i, functions.get(i).getBoundaries()[0]); // i % 2
         }
 
-//        functions = functions.stream()
-//                .map(f -> NonLinearSolver.createSupportFunction(f, accuracy))
-//                .collect(Collectors.toList());
-
-        List<Double> listX0 = new ArrayList<>(listX);
+        List<Double> listX0 = new ArrayList<>(rootList);
         int counter = 0;
         do {
             for (int i = 0; i < functions.size(); i++) {
                 ExtendedFunction supportFunc = functions.get(i);
-                listX0.set(i, listX.get(i));
-                listX.set(i, supportFunc.apply(listX.get(i)));
+                listX0.set(i, rootList.get(i));
+                rootList.set(i, supportFunc.apply(rootList.get(i)));
+                if (Math.abs(functions.get(0).getDerivativeFunction().apply(rootList.get(0))) > 1 && Math.abs(functions.get(1).getDerivativeFunction().apply(rootList.get(1))) > 1) {
+                    throw new IllegalArgumentException("Итерационный метод не сходится");
+                }
+                for (double d : rootList) if (Double.isInfinite(d)) throw new IllegalArgumentException("Value is infinite");
                 counter++;
             }
 
-        } while(allInListDeltaMoreThanAccuracy(listX, listX0, accuracy) && counter < MAX_ITERATION);
+        } while(allInListDeltaMoreThanAccuracy(rootList, listX0, accuracy) && counter < MAX_ITERATION);
 
-        return new double[]{listX.get(1), listX.get(0)};
+        return new double[]{rootList.get(1), rootList.get(0)};
     }
 
     private boolean allInListDeltaMoreThanAccuracy(List<Double> listX, List<Double> listX0, double accuracy){

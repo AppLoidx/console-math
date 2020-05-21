@@ -23,6 +23,9 @@ public class NonLinearIterationSolver implements NonLinearSolver {
         do {
             x0 = x;
             x = supportFunc.apply(x);
+            if (Math.abs(supportFunc.getDerivativeFunction().apply(x)) > 1) {
+                throw new IllegalArgumentException("[WARN]: φ'(x) > 1");
+            }
             counter++;
         } while(Math.abs(x - x0) >= accuracy && counter < MAX_ITERATION);
 
