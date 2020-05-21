@@ -31,7 +31,7 @@ public class NonLinearSystemSolver implements core.NonLinearSystemSolver {
                 listX0.set(i, rootList.get(i));
                 rootList.set(i, supportFunc.apply(rootList.get(i)));
                 if (Math.abs(functions.get(0).getDerivativeFunction().apply(rootList.get(0))) > 1 && Math.abs(functions.get(1).getDerivativeFunction().apply(rootList.get(1))) > 1) {
-                    throw new IllegalArgumentException("Итерационный метод не сходится");
+                    throw new IllegalArgumentException("Итерационный метод не сходится т.к производная больше 1");
                 }
                 for (double d : rootList) if (Double.isInfinite(d)) throw new IllegalArgumentException("Value is infinite");
                 counter++;
