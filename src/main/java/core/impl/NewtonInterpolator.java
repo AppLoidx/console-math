@@ -4,6 +4,7 @@ import core.Interpolator;
 import util.function.ExtendedFunction;
 import util.function.interfaces.Dot;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class NewtonInterpolator implements Interpolator {
         return new ExtendedFunction(x -> {
             double sum = 0;
             double coef = 1;
-            for (int i = dividedDifferences.length - 1; i > 0; i--) {
+            for (int i = dividedDifferences.length - 1; i >= 0; i--) {
                 sum += coef * dividedDifferences[i][0];
                 coef *= x - points.get(i).getX();
             }
