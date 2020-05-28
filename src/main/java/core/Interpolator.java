@@ -10,5 +10,10 @@ import java.util.List;
  * @author Arthur Kupriyanov on 21.05.2020
  */
 public interface Interpolator {
-    ExtendedFunction interpolate(List<Dot> pointList);
+    /**
+     *
+     * @param dots (x, y) coordinates
+     * @return interpolation function
+     */
+    ExtendedFunction interpolate(List<Dot> dots);
 }
