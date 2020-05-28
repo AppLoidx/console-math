@@ -12,40 +12,44 @@ import java.util.List;
  */
 public class NewtonInterpolator implements Interpolator {
     @Override
-    public ExtendedFunction interpolate(List<Dot> points) {
+    public ExtendedFunction interpolate(final List<Dot> points) {
         int size = points.size();
         double[][] matrix = new double[size][size];
-        fillMainLine(matrix, points);
-        System.out.println(Arrays.deepToString(matrix));
-        for (int i = 1; i < size; i++) {
-            for (int j = 0; j < size - i; j++) {
-                matrix[i][j] = matrix[i - 1][j + 1] - matrix[i - 1][j];
-//                dividedDiff[i][j] = dividedDiff[i - 1][j + 1] - dividedDiff[i - 1][j];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                matrix[i][j] = Double.NaN;
             }
         }
-        System.out.println(Arrays.deepToString(matrix));
-        Dot firstPoint = points.get(0);
-        double height = points.get(1).getX() - points.get(0).getX();
+
+        fillMatrix(matrix, points);
 
         return new ExtendedFunction(x -> {
-            double res = firstPoint.getY();
-            double q = (x - firstPoint.getX()) / height;
-            System.out.println("Q = " + q);
-            double product = 1;
-            for (int i = 1; i < size; i++) {
-                product *= q + 1 - i;
-                product /= i;
-                res += product * matrix[i][0];
-                System.out.println("m = " + matrix[i][0]);
+            double sum = 0;
+            double coef = 1;
+            for (int i = matrix.length - 1; i > 0; i--) {
+                sum += coef * matrix[i][0];
+                coef *= x - points.get(i).getX();
             }
-            System.out.println(res);
-            return res;
+
+            return sum;
         });
     }
 
-    private void fillMainLine(double[][] matrix, List<Dot> points) {
-        for (int i = 0; i < points.size(); i++) {
-            matrix[0][i] = points.get(i).getY();
-        }
+    private void fillMatrix(double[][] matrix, List<Dot> points) {
+        calcValue(0, 0, matrix, points);
     }
+
+    private double calcValue(int i, int j, double[][] matrix, List<Dot> points){
+        if (j == matrix.length - 1 - i) {
+            matrix[i][j] = points.get(i).getY();
+            return points.get(i).getY();
+        }
+        if (!Double.isNaN(matrix[i][j])) return matrix[i][j];
+
+        matrix[i][j] = ((calcValue(i, j + 1, matrix, points) - calcValue(i + 1, j, matrix, points)) / (points.get(i).getX() - points.get(matrix.length - j - 1).getX()) );
+        return matrix[i][j];
+    }
+
+
 }
