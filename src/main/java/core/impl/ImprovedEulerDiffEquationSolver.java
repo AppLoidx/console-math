@@ -18,17 +18,39 @@ public class ImprovedEulerDiffEquationSolver implements DiffEquationSolver {
         dots.add(new SimpleDot(x0, y0));
 
         double x = x0;
-        double y = y0;
-        double h = 0.1; // todo: avoid hardcode
+        double calculatedY = y0;
 
-        for (int i = 0; i < 5; i++) {   // todo: avoid hardcode (number of iterations)
-            double step = y + h * func.apply(x, y);
-            y = y + h * (func.apply(x, y) + func.apply(x + h , step)) / 2;
-            x += h;
+        double step = getSignedStep(x0);
 
-            dots.add(new SimpleDot(x, y));
+
+        for (int i = 0; i < 10; i++) {   // todo: avoid hardcode (number of iterations)
+            double approximatedY = approximateY(equation, step, x, calculatedY);
+            double oldY = calculatedY;
+            calculatedY = calculateY(equation, step, x, calculatedY, approximatedY);
+
+            while (Math.abs(calculatedY - approximatedY) > Math.abs(accuracy * calculatedY)) {
+                step = step / 2;
+                approximatedY = approximateY(equation, step, x, oldY);
+                calculatedY = calculateY(equation, step, x, oldY, approximatedY);
+            }
+
+            x += step;
+            dots.add(new SimpleDot(x, calculatedY));
         }
 
         return dots;
+    }
+
+    private double approximateY(DiffEquation equation, double h, double x, double y){
+        return y +  h * equation.apply(x, y);
+    }
+
+    private double calculateY(DiffEquation equation, double h, double x, double y, double approximatedY){
+        return y +  h * (equation.apply(x, y) + equation.apply(x +  h, approximatedY)) / 2;
+    }
+
+    private double getSignedStep(double x0){
+        double sign = x0 >= 0 ? -1 : 1;
+        return  0.1 * sign;
     }
 }
