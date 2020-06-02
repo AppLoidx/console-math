@@ -20,25 +20,40 @@ public class ImprovedEulerDiffEquationSolver implements DiffEquationSolver {
         double x = x0;
         double calculatedY = y0;
 
+        double[] base = calculateBase(equation, x0, y0, accuracy);
+        int pointsAmount = (int) base[0];
+        double step = base[1];
+
+        for (int i = 0; i < pointsAmount; i++) {   // todo: avoid hardcode (number of iterations)
+            double approximatedY = approximateY(equation, step, x, calculatedY);
+            calculatedY = calculateY(equation, step, x, calculatedY, approximatedY);
+            x += step;
+            dots.add(new SimpleDot(x, calculatedY));
+        }
+
+        return dots;
+    }
+
+    private double[] calculateBase(DiffEquation equation, double x0, double y0, double accuracy) {
+        double x = x0;
+        double calculatedY = y0;
         double step = getSignedStep(x0);
-
-
-        for (int i = 0; i < 10; i++) {   // todo: avoid hardcode (number of iterations)
+        int pointsAmount = 10;
+        for (int i = 0; i < pointsAmount; i++) {   // todo: avoid hardcode (number of iterations)
             double approximatedY = approximateY(equation, step, x, calculatedY);
             double oldY = calculatedY;
             calculatedY = calculateY(equation, step, x, calculatedY, approximatedY);
 
             while (Math.abs(calculatedY - approximatedY) > Math.abs(accuracy * calculatedY)) {
                 step = step / 2;
+                pointsAmount = pointsAmount * 2 ;
                 approximatedY = approximateY(equation, step, x, oldY);
                 calculatedY = calculateY(equation, step, x, oldY, approximatedY);
             }
-
             x += step;
-            dots.add(new SimpleDot(x, calculatedY));
         }
 
-        return dots;
+        return new double[]{pointsAmount, step};
     }
 
     private double approximateY(DiffEquation equation, double h, double x, double y){
