@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface DiffEquationSolver {
 
-    List<Dot> solve(DiffEquation func, double x0, double y0);
+    List<Dot> solve(DiffEquation func, double x0, double y0, double accuracy);
 }

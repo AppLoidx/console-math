@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class ImprovedEulerDiffEquationSolver implements DiffEquationSolver {
     @Override
-    public List<Dot> solve(DiffEquation func, double x0, double y0) {
+    public List<Dot> solve(DiffEquation equation, double x0, double y0, double accuracy) {
         List<Dot> dots = new ArrayList<>();
         dots.add(new SimpleDot(x0, y0));
 

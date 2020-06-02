@@ -26,7 +26,7 @@ class ImprovedEulerDiffEquationSolverTest {
         ImprovedEulerDiffEquationSolver solver = new ImprovedEulerDiffEquationSolver();
         DiffEquation function = new DiffEquation((x, y) -> y + (1 + x) * y * y);
 
-        List<Dot> dots = solver.solve(function, 1, -1);
+        List<Dot> dots = solver.solve(function, 1, -1, 0.01);
 
         System.out.println(dots);
     }
