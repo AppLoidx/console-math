@@ -67,7 +67,7 @@ public class SquareMatrix implements Matrix {
     @Override
     public String toString() {
         return "SquareMatrix{" +
-               "matrix=" + Arrays.toString(matrix) +
+               "matrix=" + Arrays.deepToString(matrix) +
                '}';
     }
 
