@@ -24,7 +24,7 @@ public class ImprovedEulerDiffEquationSolver implements DiffEquationSolver {
         int pointsAmount = (int) base[0];
         double step = base[1];
 
-        for (int i = 0; i < pointsAmount; i++) {   // todo: avoid hardcode (number of iterations)
+        for (int i = 0; i < pointsAmount; i++) {
             double approximatedY = approximateY(equation, step, x, calculatedY);
             calculatedY = calculateY(equation, step, x, calculatedY, approximatedY);
             x += step;
@@ -39,7 +39,7 @@ public class ImprovedEulerDiffEquationSolver implements DiffEquationSolver {
         double calculatedY = y0;
         double step = getSignedStep(x0);
         int pointsAmount = 10;
-        for (int i = 0; i < pointsAmount; i++) {   // todo: avoid hardcode (number of iterations)
+        for (int i = 0; i < pointsAmount; i++) {
             double approximatedY = approximateY(equation, step, x, calculatedY);
             double oldY = calculatedY;
             calculatedY = calculateY(equation, step, x, calculatedY, approximatedY);
