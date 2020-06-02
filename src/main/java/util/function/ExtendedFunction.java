@@ -1,5 +1,6 @@
 package util.function;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -73,6 +74,12 @@ public class ExtendedFunction implements Function<Double, Double>{
             signChange = 1;
         }
 
+    }
+    public void setBoundaries(double[] boundaries) {
+        if (boundaries.length != 2) {
+            throw new IllegalArgumentException("Invalid size of boundaries " + Arrays.toString(boundaries));
+        }
+        setBoundaries(boundaries[0], boundaries[1]);
     }
 
     public double[] getBoundaries() {
