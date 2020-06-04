@@ -12,20 +12,25 @@ import java.util.List;
  * @author Arthur Kupriyanov on 01.06.2020
  */
 public class ImprovedEulerDiffEquationSolver implements DiffEquationSolver {
+
+    private static final int MAX_POINTS_COUNT = 100;
+
     @Override
     public List<Dot> solve(DiffEquation equation, double x0, double y0, double accuracy) {
+        EulerSolverConfig config = calculateConfiguration(equation, x0, y0, accuracy);
+        return solve(equation, x0, y0, config.pointsAmount, config.step);
+    }
+
+    @Override
+    public List<Dot> solve(DiffEquation equation, double x0, double y0, int pointsAmount, double step) {
         List<Dot> dots = new ArrayList<>();
         dots.add(new SimpleDot(x0, y0));
 
         double x = x0;
         double calculatedY = y0;
 
-        double[] base = calculateBase(equation, x0, y0, accuracy);
-        int pointsAmount = (int) base[0];
-        double step = base[1];
-
         for (int i = 0; i < pointsAmount; i++) {
-            double approximatedY = approximateY(equation, step, x, calculatedY);
+            double approximatedY = approximateNextY(equation, step, x, calculatedY);
             calculatedY = calculateY(equation, step, x, calculatedY, approximatedY);
             x += step;
             dots.add(new SimpleDot(x, calculatedY));
@@ -34,29 +39,33 @@ public class ImprovedEulerDiffEquationSolver implements DiffEquationSolver {
         return dots;
     }
 
-    private double[] calculateBase(DiffEquation equation, double x0, double y0, double accuracy) {
+    private EulerSolverConfig calculateConfiguration(DiffEquation equation, double x0, double y0, double accuracy) {
         double x = x0;
         double calculatedY = y0;
         double step = getSignedStep(x0);
         int pointsAmount = 10;
         for (int i = 0; i < pointsAmount; i++) {
-            double approximatedY = approximateY(equation, step, x, calculatedY);
+            double approximatedY = approximateNextY(equation, step, x, calculatedY);
             double oldY = calculatedY;
             calculatedY = calculateY(equation, step, x, calculatedY, approximatedY);
 
             while (Math.abs(calculatedY - approximatedY) > Math.abs(accuracy * calculatedY)) {
+                if (pointsAmount > MAX_POINTS_COUNT) {
+                    return new EulerSolverConfig(MAX_POINTS_COUNT, step);
+                }
+
                 step = step / 2;
                 pointsAmount = pointsAmount * 2 ;
-                approximatedY = approximateY(equation, step, x, oldY);
+                approximatedY = approximateNextY(equation, step, x, oldY);
                 calculatedY = calculateY(equation, step, x, oldY, approximatedY);
             }
             x += step;
         }
 
-        return new double[]{pointsAmount, step};
+        return new EulerSolverConfig(pointsAmount, step);
     }
 
-    private double approximateY(DiffEquation equation, double h, double x, double y){
+    private double approximateNextY(DiffEquation equation, double h, double x, double y){
         return y +  h * equation.apply(x, y);
     }
 
@@ -67,5 +76,16 @@ public class ImprovedEulerDiffEquationSolver implements DiffEquationSolver {
     private double getSignedStep(double x0){
         double sign = x0 >= 0 ? -1 : 1;
         return  0.1 * sign;
+    }
+
+
+    private static class EulerSolverConfig {
+        public final int pointsAmount;
+        public final double step;
+
+        private EulerSolverConfig(int pointsAmount, double step) {
+            this.pointsAmount = pointsAmount;
+            this.step = step;
+        }
     }
 }
