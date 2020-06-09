@@ -27,10 +27,10 @@ public class SimpsonSolver implements IntegralSolver {
         }
         byte sign = (byte) (top > bottom ? 1 : -1);
 
-        return sign * step / 3 * (extendedFunction.apply( boundaries[0]) + extendedFunction.apply(boundaries[1]) + 2 * sum1 + 4 * sum2);
+        return sign * step / 3 * (extendedFunction.apply(boundaries[0]) + extendedFunction.apply(boundaries[1]) + 2 * sum1 + 4 * sum2);
     }
 
-    private void addBoundariesTo(double[] boundaries, double top, double bottom){
+    private void addBoundariesTo(double[] boundaries, double top, double bottom) {
         boundaries[0] = Math.min(top, bottom);
         boundaries[1] = Math.max(top, bottom);
     }

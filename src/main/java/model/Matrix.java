@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 /**
  * @author Arthur Kupriyanov on 28.02.2020
  */
-public interface Matrix{
+public interface Matrix {
     /**
      * Initialize matrix
      *
@@ -41,6 +41,7 @@ public interface Matrix{
                     afterEachRowCallback.run();
                 });
     }
+
     default void consumeReverse(BiConsumer<Integer, Integer> biConsumer, Runnable afterEachRowCallback) {
         IntStream.range(getYSize(), 0)
                 .forEach(y -> {
@@ -52,14 +53,16 @@ public interface Matrix{
 
 
     default void consume(BiConsumer<Integer, Integer> biConsumer) {
-        consume(biConsumer, () -> {});
+        consume(biConsumer, () -> {
+        });
     }
 
     default void consumeReverse(BiConsumer<Integer, Integer> biConsumer) {
-        consumeReverse(biConsumer, () -> {});
+        consumeReverse(biConsumer, () -> {
+        });
     }
 
-    default Matrix decompose(MatrixDecomposer matrixDecomposer){
+    default Matrix decompose(MatrixDecomposer matrixDecomposer) {
         return matrixDecomposer.decompose(this);
     }
 

@@ -13,12 +13,12 @@ class PyramidDecomposerTest {
     private static final MatrixPrinter printer = new SimplePrettyPrinter();
 
     @Test
-    public void simpleTest(){
+    public void simpleTest() {
         SquareMatrix squareMatrix = new SquareMatrix();
         squareMatrix.init(new float[][]{
                 {3, 2, -5, -1},
-                {2, -1, 3 , 13},
-                {1, 2 , -1 , 9}
+                {2, -1, 3, 13},
+                {1, 2, -1, 9}
         });
         printer.prettyPrint(squareMatrix, System.out);
         System.out.println();

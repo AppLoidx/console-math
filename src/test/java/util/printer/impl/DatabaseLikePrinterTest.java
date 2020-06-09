@@ -11,7 +11,7 @@ import testutil.RandomizerUtil;
 class DatabaseLikePrinterTest {
 
     @Test
-    public void prettyPrint(){
+    public void prettyPrint() {
         Matrix matrix = new SquareMatrix();
         matrix.init(new RandomizerUtil().getRandomMatrix(12, 12));
 
@@ -19,7 +19,7 @@ class DatabaseLikePrinterTest {
     }
 
     @Test
-    public void smallTest(){
+    public void smallTest() {
         System.out.println(Float.valueOf(0));
     }
 

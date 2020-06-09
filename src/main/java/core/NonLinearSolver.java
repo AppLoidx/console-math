@@ -10,19 +10,20 @@ import java.util.function.Function;
  */
 public interface NonLinearSolver {
     double solve(ExtendedFunction extFunction, double accuracy);
+
     double getLastAnswer();
 
     /**
      * Creates function <code>x = p(x)</code> from f(x)
-     *
+     * <p>
      * It can be used for fixed point iteration method
      *
      * @param extFunction original function
-     * @param accuracy epsilon for getting max value from func {@link ExtendedFunction#getMaxValueOfFunc(Function, double, double, double)}
+     * @param accuracy    epsilon for getting max value from func {@link ExtendedFunction#getMaxValueOfFunc(Function, double, double, double)}
      * @return function with form x = p(x)
      */
-    static ExtendedFunction createSupportFunction(ExtendedFunction extFunction, double accuracy){
-        double lambda = - 1d /
+    static ExtendedFunction createSupportFunction(ExtendedFunction extFunction, double accuracy) {
+        double lambda = -1d /
                         ExtendedFunction.getMaxValueOfFunc(
                                 extFunction.getDerivativeFunction(),
                                 extFunction.getBoundaries()[0],

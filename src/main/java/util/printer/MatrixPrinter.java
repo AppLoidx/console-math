@@ -9,5 +9,6 @@ import java.io.PrintStream;
  */
 public interface MatrixPrinter {
     void prettyPrint(Matrix matrix, PrintStream out);
+
     void prettyPrint(Matrix matrix);
 }

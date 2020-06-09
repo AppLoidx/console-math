@@ -6,9 +6,10 @@ import model.Matrix;
  * @author Arthur Kupriyanov on 05.03.2020
  */
 public final class ResidualColumn {
-    private ResidualColumn(){}
+    private ResidualColumn() {
+    }
 
-    public static float[] getFrom(Matrix matrix , float[] variables){
+    public static float[] getFrom(Matrix matrix, float[] variables) {
         float[] residualColumn = new float[matrix.getYSize()];
         for (int hIndex = 0; hIndex < matrix.getYSize(); hIndex++) {
             float sum = 0;

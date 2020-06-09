@@ -1,9 +1,7 @@
 package core.impl;
 
 import core.NonLinearSolver;
-import util.function.DerivativeFunction;
 import util.function.ExtendedFunction;
-import util.function.interfaces.DoubleFunction;
 
 /**
  * @author Arthur Kupriyanov on 07.04.2020
@@ -27,7 +25,7 @@ public class NonLinearIterationSolver implements NonLinearSolver {
                 throw new IllegalArgumentException("[WARN]: φ'(x) > 1");
             }
             counter++;
-        } while(Math.abs(x - x0) >= accuracy && counter < MAX_ITERATION);
+        } while (Math.abs(x - x0) >= accuracy && counter < MAX_ITERATION);
 
         lastXVal = x;
         if (counter == MAX_ITERATION) {

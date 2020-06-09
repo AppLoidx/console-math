@@ -19,7 +19,7 @@ public class GaussMatrixSolver implements MatrixSolver {
     private Matrix matrix;
 
 
-    public GaussMatrixSolver(Matrix matrix){
+    public GaussMatrixSolver(Matrix matrix) {
         this.matrix = matrix.getClone();
         this.variables = solve();
     }
@@ -35,7 +35,7 @@ public class GaussMatrixSolver implements MatrixSolver {
         return backSubstitution(matrix);
     }
 
-    private float[] backSubstitution(Matrix matrix){
+    private float[] backSubstitution(Matrix matrix) {
         float[] values = new float[matrix.getYSize()];
         for (int hIndex = matrix.getYSize() - 1; hIndex >= 0; hIndex--) {
 
@@ -52,19 +52,19 @@ public class GaussMatrixSolver implements MatrixSolver {
         return this.determinant;
     }
 
-    public float[] getVariables(){
+    public float[] getVariables() {
         return this.variables;
     }
 
-    public Matrix getTriangleMatrix(){
+    public Matrix getTriangleMatrix() {
         return triangleMatrix;
     }
 
-    public float[] getResidualColumn(){
+    public float[] getResidualColumn() {
         return ResidualColumn.getFrom(matrix, getVariables());
     }
 
-    private float findVariable(Matrix matrix, int hIndex, float initialValue, float[] previousVariables){
+    private float findVariable(Matrix matrix, int hIndex, float initialValue, float[] previousVariables) {
         float value = initialValue;
         for (int vIndex = matrix.getXSize() - 2; vIndex >= 0; vIndex--) {
             value = value - matrix.getElement(hIndex, vIndex) * previousVariables[vIndex];
@@ -72,7 +72,7 @@ public class GaussMatrixSolver implements MatrixSolver {
         return value;
     }
 
-    public static boolean isCanBeSolved(Matrix matrix){
+    public static boolean isCanBeSolved(Matrix matrix) {
 
         for (int i = 0; i < matrix.getYSize(); i++) {
             if (matrix.getElement(i, i) == 0) {

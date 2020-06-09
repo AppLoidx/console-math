@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class NonLinearSecantSolverTest {
     @Test
-    public void simpleTest(){
+    public void simpleTest() {
         ExtendedFunction f = new ExtendedFunction(x -> Math.pow(x, 3) - x + 4);
 
         f.setBoundaries(-1, -2);
@@ -24,7 +24,7 @@ class NonLinearSecantSolverTest {
     }
 
     @Test
-    public void sin_x(){
+    public void sin_x() {
         ExtendedFunction f = new ExtendedFunction(x -> Math.sin(x));
 
         f.setBoundaries(-6, 5);
@@ -36,8 +36,9 @@ class NonLinearSecantSolverTest {
         System.out.println(new NonLinearSecantSolver().solve(f, accuracy));
     }
 
-    @Test@Disabled
-    public void sin_x_plus_1(){
+    @Test
+    @Disabled
+    public void sin_x_plus_1() {
         ExtendedFunction f = new ExtendedFunction(x -> Math.sin(x) + 1);
 
         f.setBoundaries(3, 4);
@@ -49,7 +50,7 @@ class NonLinearSecantSolverTest {
     }
 
     @Test
-    public void simple_test(){
+    public void simple_test() {
         ExtendedFunction f = new ExtendedFunction(x -> Math.pow(x, 3) - 4 * x + 4);
 
         f.setBoundaries(-3, -2);

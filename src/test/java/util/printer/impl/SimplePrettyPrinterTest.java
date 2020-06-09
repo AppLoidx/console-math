@@ -11,7 +11,7 @@ import testutil.RandomizerUtil;
 class SimplePrettyPrinterTest {
 
     @Test
-    public void prettyPrint(){
+    public void prettyPrint() {
         Matrix matrix = new SquareMatrix();
         matrix.init(new RandomizerUtil().getRandomMatrix(12, 12));
         for (int i = 0; i < matrix.getYSize(); i++) {

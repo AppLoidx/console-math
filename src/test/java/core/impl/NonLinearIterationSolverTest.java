@@ -20,9 +20,10 @@ class NonLinearIterationSolverTest {
         dFunc.setIsInRange(x -> true);
         f.setDerivativeFunction(dFunc);
 
-        double ans = solver.solve(f, 0.0001d );
+        double ans = solver.solve(f, 0.0001d);
         assertEquals(-1.7963d, ans, 0.0001d);
     }
+
     @Test
     public void simpleTest_linear() {
         NonLinearIterationSolver solver = new NonLinearIterationSolver();
@@ -32,7 +33,7 @@ class NonLinearIterationSolverTest {
         dFunc.setIsInRange(x -> true);
         f.setDerivativeFunction(dFunc);
 
-        double ans = solver.solve(f, 0.0001d );
+        double ans = solver.solve(f, 0.0001d);
         assertEquals(0, ans, 0.0001d);
     }
 
@@ -41,11 +42,11 @@ class NonLinearIterationSolverTest {
         NonLinearIterationSolver solver = new NonLinearIterationSolver();
         ExtendedFunction f = new ExtendedFunction(Math::sin);
         f.setBoundaries(0, 1);
-        DerivativeFunction dFunc = new DerivativeFunction(x -> - Math.cos(x));
+        DerivativeFunction dFunc = new DerivativeFunction(x -> -Math.cos(x));
         dFunc.setIsInRange(x -> true);
         f.setDerivativeFunction(dFunc);
 
-        double ans = solver.solve(f, 0.0001d );
+        double ans = solver.solve(f, 0.0001d);
         assertEquals(0, ans, 0.0001d);
     }
 
@@ -54,11 +55,11 @@ class NonLinearIterationSolverTest {
         NonLinearIterationSolver solver = new NonLinearIterationSolver();
         ExtendedFunction f = new ExtendedFunction(Math::sin);
         f.setBoundaries(-1, 1);
-        DerivativeFunction dFunc = new DerivativeFunction(x -> - Math.cos(x));
+        DerivativeFunction dFunc = new DerivativeFunction(x -> -Math.cos(x));
         dFunc.setIsInRange(x -> true);
         f.setDerivativeFunction(dFunc);
 
-        double ans = solver.solve(f, 0.0001d );
+        double ans = solver.solve(f, 0.0001d);
         assertEquals(0, ans, 0.0001d);
     }
 

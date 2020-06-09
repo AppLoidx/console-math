@@ -27,7 +27,8 @@ public final class DatabaseLikePrinter implements MatrixPrinter {
     public DatabaseLikePrinter() {
         this.asNull = DEFAULT_AS_NULL;
     }
-    public DatabaseLikePrinter(PrintStream out){
+
+    public DatabaseLikePrinter(PrintStream out) {
         this();
         this.out = out;
     }

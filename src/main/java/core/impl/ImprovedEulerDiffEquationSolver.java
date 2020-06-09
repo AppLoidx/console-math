@@ -55,7 +55,7 @@ public class ImprovedEulerDiffEquationSolver implements DiffEquationSolver {
                 }
 
                 step = step / 2;
-                pointsAmount = pointsAmount * 2 ;
+                pointsAmount = pointsAmount * 2;
                 approximatedY = approximateNextY(equation, step, x, oldY);
                 calculatedY = calculateY(equation, step, x, oldY, approximatedY);
             }
@@ -65,17 +65,17 @@ public class ImprovedEulerDiffEquationSolver implements DiffEquationSolver {
         return new EulerSolverConfig(pointsAmount, step);
     }
 
-    private double approximateNextY(DiffEquation equation, double h, double x, double y){
-        return y +  h * equation.apply(x, y);
+    private double approximateNextY(DiffEquation equation, double h, double x, double y) {
+        return y + h * equation.apply(x, y);
     }
 
-    private double calculateY(DiffEquation equation, double h, double x, double y, double approximatedY){
-        return y +  h * (equation.apply(x, y) + equation.apply(x +  h, approximatedY)) / 2;
+    private double calculateY(DiffEquation equation, double h, double x, double y, double approximatedY) {
+        return y + h * (equation.apply(x, y) + equation.apply(x + h, approximatedY)) / 2;
     }
 
-    private double getSignedStep(double x0){
+    private double getSignedStep(double x0) {
         double sign = x0 >= 0 ? -1 : 1;
-        return  0.1 * sign;
+        return 0.1 * sign;
     }
 
 

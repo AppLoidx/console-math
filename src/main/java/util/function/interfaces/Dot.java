@@ -5,5 +5,6 @@ package util.function.interfaces;
  */
 public interface Dot {
     double getX();
+
     double getY();
 }

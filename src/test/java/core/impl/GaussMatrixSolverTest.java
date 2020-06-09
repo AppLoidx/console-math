@@ -22,13 +22,13 @@ class GaussMatrixSolverTest {
     private static final PrintStream OUT = System.out;
 
     @Test
-    public void test(){
+    public void test() {
 
         SquareMatrix squareMatrix = new SquareMatrix();
         squareMatrix.init(new float[][]{
                 {3, 2, -5, -1},
-                {2, -1, 3 , 13},
-                {1, 2 , -1 , 9}
+                {2, -1, 3, 13},
+                {1, 2, -1, 9}
         });
 
         GaussMatrixSolver solver = new GaussMatrixSolver(squareMatrix);
@@ -60,25 +60,25 @@ class GaussMatrixSolverTest {
     }
 
     @Test
-    public void canBeSolved(){
+    public void canBeSolved() {
         SquareMatrix squareMatrix = new SquareMatrix();
         squareMatrix.init(new float[][]{
                 {0, 2, -5, -1},
-                {2, 0, 3 , 13},
-                {1, 2 , 0 , 9}
+                {2, 0, 3, 13},
+                {1, 2, 0, 9}
         });
         assertFalse(GaussMatrixSolver.isCanBeSolved(squareMatrix));
 
         squareMatrix.init(new float[][]{
                 {3, 2, -5, -1},
-                {2, -1, 3 , 13},
-                {1, 2 , -1 , 9}
+                {2, -1, 3, 13},
+                {1, 2, -1, 9}
         });
 
         assertTrue(GaussMatrixSolver.isCanBeSolved(squareMatrix));
     }
 
-    private void printSolution(Matrix source, Matrix triangle, float determinant , float[] variables, GaussMatrixSolver solver){
+    private void printSolution(Matrix source, Matrix triangle, float determinant, float[] variables, GaussMatrixSolver solver) {
         OUT.println("Исходная матрца: ");
         PRINTER.prettyPrint(source, OUT);
 
@@ -90,7 +90,7 @@ class GaussMatrixSolverTest {
 
         OUT.print("Переменные: ");
         int index = 1;
-        for (float val : variables){
+        for (float val : variables) {
             OUT.print(String.format("x%d: %f, ", index, val));
             index++;
         }

@@ -4,12 +4,14 @@ package util;
  * @author Arthur Kupriyanov on 08.04.2020
  */
 public final class DoubleUtil {
-    private DoubleUtil(){}
+    private DoubleUtil() {
+    }
 
     /**
      * Check is equal with accuracy
-     * @param d1 first value
-     * @param d2 second value
+     *
+     * @param d1  first value
+     * @param d2  second value
      * @param acc accuracy (like 0.001d, 0.00001d and etc)
      * @return <code>true</code> if equals, else <code>false</code>
      */
@@ -21,8 +23,9 @@ public final class DoubleUtil {
 
     /**
      * Round double value with accuracy
+     *
      * @param value round value
-     * @param acc accuracy
+     * @param acc   accuracy
      * @return rounded value
      */
     public static double round(double value, double acc) {

@@ -12,14 +12,16 @@ public final class SimplePrettyPrinter implements MatrixPrinter {
 
     private PrintStream out = System.out;
 
-    public SimplePrettyPrinter(){}
-    public SimplePrettyPrinter(PrintStream out){
+    public SimplePrettyPrinter() {
+    }
+
+    public SimplePrettyPrinter(PrintStream out) {
         this.out = out;
     }
 
 
     @Override
-    public void prettyPrint(Matrix matrix, PrintStream out){
+    public void prettyPrint(Matrix matrix, PrintStream out) {
         final String[][] printMap = new String[matrix.getYSize()][matrix.getXSize()];
         final int[] maxLength = {0};
 

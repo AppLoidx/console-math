@@ -3,7 +3,6 @@ package core;
 import util.function.ExtendedFunction;
 import util.function.interfaces.Dot;
 
-
 import java.util.List;
 
 /**
@@ -11,7 +10,6 @@ import java.util.List;
  */
 public interface Interpolator {
     /**
-     *
      * @param dots (x, y) coordinates
      * @return interpolation function
      */

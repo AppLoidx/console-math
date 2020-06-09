@@ -4,7 +4,6 @@ import core.Interpolator;
 import util.function.ExtendedFunction;
 import util.function.interfaces.Dot;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,7 +20,7 @@ public class NewtonInterpolator implements Interpolator {
     public ExtendedFunction interpolate(final List<Dot> dots) {
         List<Dot> points = List.copyOf(dots);
 
-        double[][] dividedDifferences = calculateDividedDifferences( points);
+        double[][] dividedDifferences = calculateDividedDifferences(points);
 
         return new ExtendedFunction(x -> {
             double sum = 0;
@@ -41,7 +40,7 @@ public class NewtonInterpolator implements Interpolator {
         return cache;
     }
 
-    private double calcDividedDifference(int i, int j, double[][] matrix, List<Dot> points){
+    private double calcDividedDifference(int i, int j, double[][] matrix, List<Dot> points) {
         if (!Double.isNaN(matrix[i][j])) {
             return matrix[i][j];
         }
@@ -53,12 +52,12 @@ public class NewtonInterpolator implements Interpolator {
 
 
         matrix[i][j] = ((calcDividedDifference(i, j + 1, matrix, points) - calcDividedDifference(i + 1, j, matrix, points))
-                        / (points.get(i).getX() - points.get(matrix.length - j - 1).getX()) );
+                        / (points.get(i).getX() - points.get(matrix.length - j - 1).getX()));
         return matrix[i][j];
     }
 
 
-    private double[][] createEmptyMatrix(int size){
+    private double[][] createEmptyMatrix(int size) {
         double[][] matrix = new double[size][size];
 
         for (int i = 0; i < matrix.length; i++) {

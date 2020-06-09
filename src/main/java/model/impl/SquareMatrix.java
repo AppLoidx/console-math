@@ -15,7 +15,7 @@ public class SquareMatrix implements Matrix {
     @Override
     public void init(float[][] matrix) {
 
-        if (matrix.length > 0 && matrix.length + 1 == matrix[0].length){
+        if (matrix.length > 0 && matrix.length + 1 == matrix[0].length) {
             this.matrix = matrix;
         } else {
             throw new IllegalArgumentException("Provided matrix is not square");
@@ -24,14 +24,14 @@ public class SquareMatrix implements Matrix {
     }
 
     @Override
-    public float setElement(final int y, final int x, final  float value) {
+    public float setElement(final int y, final int x, final float value) {
         float oldValue = matrix[y][x];
         matrix[y][x] = value;
         return oldValue;
     }
 
     @Override
-    public float getElement(int  y, int x) {
+    public float getElement(int y, int x) {
         return matrix[y][x];
     }
 
@@ -50,7 +50,7 @@ public class SquareMatrix implements Matrix {
         Matrix clone = new SquareMatrix();
         float[][] copyMatrix = new float[getYSize()][getXSize()];
         int hIndex = 0;
-        for( float[] array : getMatrix() ) {
+        for (float[] array : getMatrix()) {
             copyMatrix[hIndex] = Arrays.copyOf(array, array.length);
             hIndex++;
         }
@@ -60,7 +60,7 @@ public class SquareMatrix implements Matrix {
         return clone;
     }
 
-    public float[][] getMatrix(){
+    public float[][] getMatrix() {
         return matrix;
     }
 

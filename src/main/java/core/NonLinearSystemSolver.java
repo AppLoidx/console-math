@@ -9,5 +9,6 @@ import java.util.List;
  */
 public interface NonLinearSystemSolver {
     double[] nonlinearSystemSolver(List<ExtendedFunction> extendedFunctions, double accuracy);
+
     double getLastAnswer();
 }

@@ -41,7 +41,7 @@ public class NonLinearSecantSolver implements NonLinearSolver {
                 throw new IllegalArgumentException("Не хватает вычислительной мощности");
             }
             counter--;
-            if (counter  < 0 ) {
+            if (counter < 0) {
                 throw new IllegalArgumentException("Слишком много итераций (>100_000_000)");
             }
         }
@@ -54,17 +54,17 @@ public class NonLinearSecantSolver implements NonLinearSolver {
         return lastXVal;
     }
 
-    private boolean isLeftSideDerivative(ExtendedFunction function, double oldValue){
+    private boolean isLeftSideDerivative(ExtendedFunction function, double oldValue) {
         if (function.getBoundaries()[0] < 0 && oldValue >= 0) return true;
         else return function.getBoundaries()[0] >= 0 && oldValue < 0;
     }
 
-    private double calculateRightSide(ExtendedFunction function, double oldValue){
+    private double calculateRightSide(ExtendedFunction function, double oldValue) {
         return calculateX(function, oldValue, function.getBoundaries()[1]);
     }
 
     private double calculateLeftSide(ExtendedFunction function, double oldValue) {
-        return calculateX(function,function.getBoundaries()[0], oldValue);
+        return calculateX(function, function.getBoundaries()[0], oldValue);
     }
 
     private double calculateX(ExtendedFunction func, double a, double b) {

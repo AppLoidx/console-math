@@ -1,11 +1,9 @@
 package core.impl;
 
-import core.NonLinearSolver;
 import util.function.ExtendedFunction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Simple-iterative method for solving nonlinear systems
@@ -33,16 +31,17 @@ public class NonLinearSystemSolver implements core.NonLinearSystemSolver {
                 if (Math.abs(functions.get(0).getDerivativeFunction().apply(rootList.get(0))) > 1 && Math.abs(functions.get(1).getDerivativeFunction().apply(rootList.get(1))) > 1) {
                     throw new IllegalArgumentException("Итерационный метод не сходится т.к производная больше 1");
                 }
-                for (double d : rootList) if (Double.isInfinite(d)) throw new IllegalArgumentException("Value is infinite");
+                for (double d : rootList)
+                    if (Double.isInfinite(d)) throw new IllegalArgumentException("Value is infinite");
                 counter++;
             }
 
-        } while(allInListDeltaMoreThanAccuracy(rootList, listX0, accuracy) && counter < MAX_ITERATION);
+        } while (allInListDeltaMoreThanAccuracy(rootList, listX0, accuracy) && counter < MAX_ITERATION);
 
         return new double[]{rootList.get(1), rootList.get(0)};
     }
 
-    private boolean allInListDeltaMoreThanAccuracy(List<Double> listX, List<Double> listX0, double accuracy){
+    private boolean allInListDeltaMoreThanAccuracy(List<Double> listX, List<Double> listX0, double accuracy) {
 
         boolean moreThanAccuracy = false;
         for (int i = 0; i < listX.size(); i++) {

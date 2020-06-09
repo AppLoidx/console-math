@@ -8,7 +8,7 @@ import java.util.function.Function;
 /**
  * @author Arthur Kupriyanov on 29.03.2020
  */
-public class ExtendedFunction implements Function<Double, Double>{
+public class ExtendedFunction implements Function<Double, Double> {
     private Map<Double, Function<Double, Double>> piecewiseMap = new HashMap<>();
     private final Function<Double, Double> function;
 
@@ -31,6 +31,7 @@ public class ExtendedFunction implements Function<Double, Double>{
     public ExtendedFunction(Function<Double, Double> function) {
         this.function = function;
     }
+
     public ExtendedFunction(ExtendedFunction extFunc) {
         piecewiseMap = new HashMap<>(extFunc.piecewiseMap);
         double bottom = extFunc.boundaries[0];
@@ -55,6 +56,7 @@ public class ExtendedFunction implements Function<Double, Double>{
     public void setSignChange(byte b) {
         signChange = b;
     }
+
     public double apply(double value) {
         if (isInRange.apply(value)) return signChange * piecewiseMap.getOrDefault(value, function).apply(value);
         else throw new IllegalArgumentException("Значение функции вышло из области допустимых значений");
@@ -75,6 +77,7 @@ public class ExtendedFunction implements Function<Double, Double>{
         }
 
     }
+
     public void setBoundaries(double[] boundaries) {
         if (boundaries.length != 2) {
             throw new IllegalArgumentException("Invalid size of boundaries " + Arrays.toString(boundaries));
@@ -95,11 +98,11 @@ public class ExtendedFunction implements Function<Double, Double>{
         this.derivativeFunction = derivativeFunction;
     }
 
-    public static double getMaxValueOfFunc(Function<Double, Double> function, double top, double bottom, double accuracy){
+    public static double getMaxValueOfFunc(Function<Double, Double> function, double top, double bottom, double accuracy) {
         int sectionsCount = (int) (Math.abs(top - bottom) / accuracy);
         double step = Math.abs((top - bottom) / sectionsCount);
         sectionsCount = sectionsCount - 1;  // don't check top and bottom, because of 0.0000000001d and other shit :)
-                                            // machine eps, btw x)
+        // machine eps, btw x)
         double currentValue = Math.min(top, bottom);
         double maxVal = -Double.MAX_VALUE;
         while (sectionsCount - 1 > 0) {
@@ -111,11 +114,13 @@ public class ExtendedFunction implements Function<Double, Double>{
         // check top and bottom separately
         maxVal = Math.max(maxVal, function.apply(top));
         return maxVal;
-    };
+    }
+
+    ;
 
     @Override
     public Double apply(Double aDouble) {
-        return apply((double)aDouble);
+        return apply((double) aDouble);
     }
 
 

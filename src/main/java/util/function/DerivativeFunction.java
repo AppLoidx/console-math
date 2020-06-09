@@ -5,7 +5,7 @@ import java.util.function.Function;
 /**
  * @author Arthur Kupriyanov on 07.04.2020
  */
-public class DerivativeFunction implements Function<Double, Double>{
+public class DerivativeFunction implements Function<Double, Double> {
     private Function<Double, Double> function;
     private Function<Double, Boolean> isInRange = x -> true;
 
@@ -13,7 +13,7 @@ public class DerivativeFunction implements Function<Double, Double>{
         this.function = function;
     }
 
-    public double apply(double x ){
+    public double apply(double x) {
         if (isInRange.apply(x)) {
             return function.apply(x);
         } else {

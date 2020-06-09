@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
  */
 class DoubleUtilTest {
     @Test
-    public void test(){
+    public void test() {
         double val = 0.6998254341386636d;
         double acc = 0.0001d;
         System.out.println(DoubleUtil.round(val, acc));

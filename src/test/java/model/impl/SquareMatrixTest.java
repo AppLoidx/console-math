@@ -20,15 +20,15 @@ class SquareMatrixTest {
 
         actualMatrix.init(matrix);
 
-        for (int y = 0; y < yLen ; y++){
-            for (int x = 0; x < xLen; x++){
+        for (int y = 0; y < yLen; y++) {
+            for (int x = 0; x < xLen; x++) {
                 assertEquals(matrix[y][x], actualMatrix.getElement(y, x));
             }
         }
     }
 
     @Test
-    public void get_set_Element(){
+    public void get_set_Element() {
         SquareMatrix actualMatrix = new SquareMatrix();
         final int xLen = 5;
         final int yLen = 5;
@@ -36,8 +36,8 @@ class SquareMatrixTest {
 
         actualMatrix.init(new float[yLen][xLen]);
 
-        for (int y = 0; y < yLen ; y++){
-            for (int x = 0; x < xLen; x++){
+        for (int y = 0; y < yLen; y++) {
+            for (int x = 0; x < xLen; x++) {
                 float oldValue = actualMatrix.setElement(y, x, matrix[y][x]);
                 assertEquals(0f, oldValue);
             }
@@ -46,10 +46,10 @@ class SquareMatrixTest {
         SquareMatrix expectedMatrix = new SquareMatrix();
         expectedMatrix.init(matrix);
 
-        for (int y = 0; y < yLen ; y++){
-            for (int x = 0; x < xLen; x++){
+        for (int y = 0; y < yLen; y++) {
+            for (int x = 0; x < xLen; x++) {
                 assertEquals(matrix[y][x], actualMatrix.getElement(y, x));
-                assertEquals(expectedMatrix.getElement(y,x), actualMatrix.getElement(y, x));
+                assertEquals(expectedMatrix.getElement(y, x), actualMatrix.getElement(y, x));
             }
         }
     }
