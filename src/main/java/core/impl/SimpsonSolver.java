@@ -8,8 +8,8 @@ import util.function.ExtendedFunction;
  */
 public class SimpsonSolver implements IntegralSolver {
     @Override
-    public double solve(ExtendedFunction extendedFunction, int top, int bottom, double partition) {
-        int[] boundaries = new int[2];
+    public double solve(ExtendedFunction extendedFunction, double top, double bottom, double partition) {
+        double[] boundaries = new double[2];
         addBoundariesTo(boundaries, top, bottom);
 
         double step = (boundaries[1] - boundaries[0] * 1d) / partition;
@@ -30,7 +30,7 @@ public class SimpsonSolver implements IntegralSolver {
         return sign * step / 3 * (extendedFunction.apply( boundaries[0]) + extendedFunction.apply(boundaries[1]) + 2 * sum1 + 4 * sum2);
     }
 
-    private void addBoundariesTo(int[] boundaries, int top, int bottom){
+    private void addBoundariesTo(double[] boundaries, double top, double bottom){
         boundaries[0] = Math.min(top, bottom);
         boundaries[1] = Math.max(top, bottom);
     }
